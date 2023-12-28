@@ -109,6 +109,23 @@ class ProductManager {
   }
 
   //metodo para borrarproducto por id
+  async deleteProduct(id){
+    try{
+      await this.loadProductFromFile();
+      const index = this.products.findIndex(product => product.id == id);
+      if(index !== -1){
+        this.products.slice(index, 1);
+
+        await this.saveProductFile();
+        console.log(`El producto con ID ${id} fue eliminado`)
+      }else{
+        console.log(`No se encuentra el produscto con ID ${id}`);
+      }
+    }
+    catch(err) {
+      console.error('Errror al intentar eliminar producto', err);
+    }
+  }
 
   
 }
@@ -145,19 +162,17 @@ const productManager = new ProductManager();
 //   stock: 12,
 // });
 
-//traer los productos
-// console.log(productManager.getProduts());
 
 // actualizar producto
-const productedUpdate = {
-  title: "helado",
-  description: "Hecho con leche",
-  price: 70,
-  thumbnail: "/images/product2.jpg",
-  code: "P002",
-  stock: 10,
-};
-productManager.updateProducts(2, productedUpdate);
+// const productedUpdate = {
+//   title: "helado",
+//   description: "Hecho con leche",
+//   price: 70,
+//   thumbnail: "/images/product2.jpg",
+//   code: "P002",
+//   stock: 10,
+// };
+// productManager.updateProducts(2, productedUpdate);
 
 //buscar por id
 // console.log(productManager.getProductById(1));
@@ -165,3 +180,10 @@ productManager.updateProducts(2, productedUpdate);
 //buscar por id que no esta
 // console.log(productManager.getProductById(3));
 // productManager.showProducts();
+
+// productManager.deleteProduct(1);
+
+//traer los productos
+// console.log(productManager.getProduts());
+
+productManager.showProducts();
