@@ -1,4 +1,3 @@
-const { json } = require("node:stream/consumers");
 
 const fs = require("fs").promises;
 
@@ -112,9 +111,9 @@ class ProductManager {
   async deleteProduct(id){
     try{
       await this.loadProductFromFile();
-      const index = this.products.findIndex(product => product.id == id);
+      const index = this.products.findIndex(product => product.id === id);
       if(index !== -1){
-        this.products.slice(index, 1);
+        const deletedProduct = this.products.splice(index, 1)[0];
 
         await this.saveProductFile();
         console.log(`El producto con ID ${id} fue eliminado`)
@@ -134,23 +133,23 @@ class ProductManager {
 const productManager = new ProductManager();
 
 //agregar productos
-// productManager.addProduct({
-//   title: "Producto 1",
-//   description: "Descripción del Producto 1",
-//   price: 20,
-//   thumbnail: "/images/product1.jpg",
-//   code: "P001",
-//   stock: 10,
-// });
+productManager.addProduct({
+  title: "Producto 1",
+  description: "Descripción del Producto 1",
+  price: 20,
+  thumbnail: "/images/product1.jpg",
+  code: "P001",
+  stock: 10,
+});
 
-// productManager.addProduct({
-//   title: "Producto 2",
-//   description: "Descripción del Producto 2",
-//   price: 30,
-//   thumbnail: "/images/product2.jpg",
-//   code: "P002",
-//   stock: 15,
-// });
+productManager.addProduct({
+  title: "Producto 2",
+  description: "Descripción del Producto 2",
+  price: 30,
+  thumbnail: "/images/product2.jpg",
+  code: "P002",
+  stock: 15,
+});
 
 // Intentar agregar un producto con código duplicado
 // productManager.addProduct({

@@ -9,12 +9,12 @@
     "id": 1
   },
   {
-    "title": "helado",
-    "description": "Hecho con leche",
-    "price": 70,
+    "title": "Producto 2",
+    "description": "Descripción del Producto 2",
+    "price": 30,
     "thumbnail": "/images/product2.jpg",
     "code": "P002",
-    "stock": 10,
+    "stock": 15,
     "id": 2
   }
 ]
